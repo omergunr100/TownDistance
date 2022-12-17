@@ -1,5 +1,16 @@
 #include "List.h"
 
+List::~List()
+{
+	ListNode* prev = nullptr, * curr = m_head;
+	while (curr != nullptr)
+	{
+		prev = curr;
+		curr = curr->next;
+		delete prev;
+	}
+}
+
 void List::addRoad(int town)
 {
 	if (m_head == nullptr) {

@@ -63,6 +63,8 @@ int stackDistance(vector<List>& country, int x, int w, vector<COLOR> colors) {
 	return -1;
 }
 
+bool validateCity(const vector<List>& country, int town);
+
 int main() {
 	int numTowns, numRoads;
 	cin >> numTowns;
@@ -82,15 +84,28 @@ int main() {
 		int a, b;
 		cin >> a;
 		cin >> b;
-		if (a < 1 || b < 1 || a > numTowns || b > numTowns) {
+		if (!validateCity(country, a) || !validateCity(country, b)) {
 			cout << "Error, user input doesn't match specifications!" << endl;
 			exit(1);
 		}
 		country[a - 1].addRoad(b);
 		country[b - 1].addRoad(a);
 	}
-	//int temp = recursiveDistance(country, 3, 4, colors);
-	int temp = stackDistance(country, 2, 5, colors);
-	cout << endl;
-	cout << temp << endl;
+	cout << "Enter 2 town numbers: (Origin -> Destination)" << endl;
+	int a, b;
+	cin >> a;
+	cin >> b;
+	if (!validateCity(country, a) || !validateCity(country, b)) {
+		cout << "Error, user input doesn't match specifications!" << endl;
+		exit(1);
+	}
+	cout << "Recursive: " << recursiveDistance(country, a, b, colors) << endl;
+	cout << "Stack: " << stackDistance(country, a, b, colors) << endl;
+}
+
+bool validateCity(const vector<List>& country, int town)
+{
+	if (town < 1 || town > country.size())
+		return false;
+	return true;
 }

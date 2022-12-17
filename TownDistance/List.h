@@ -13,6 +13,7 @@ private:
 
 public:
 	List() { m_head = nullptr; }
+	~List();
 	
 	void addRoad(int town);
 	ListNode* getHead() { return m_head; }
